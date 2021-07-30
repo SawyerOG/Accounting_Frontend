@@ -26,12 +26,6 @@ export const AuthContext = createContext({
 
 const AuthContextProvider: React.FC = ({ children }) => {
     const [auth, setAuth] = useState<Auth>({ authName: '', employeeID: '', authIDs: [], isAuthed: false });
-    // const [activeUsers, setActiveUsers] = useState(0);
-
-    // socket.on('UPDATE_USER_COUNT', (data: { data: number }) => {
-    //     console.log('UPDATE_USER_COUNT', data);
-    //     setActiveUsers(data.data);
-    // });
 
     const loginHandler = (authName: string, employeeID: string, authIDs: number[]) => {
         setAuth({
@@ -40,8 +34,6 @@ const AuthContextProvider: React.FC = ({ children }) => {
             authIDs: authIDs,
             isAuthed: true,
         });
-        console.log('logging in');
-        // socket.emit('GET_USERS_COUNT');
     };
 
     const logoutHandler = () => {
