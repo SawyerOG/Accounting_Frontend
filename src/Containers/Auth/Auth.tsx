@@ -2,8 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import Alert from 'react-bootstrap/Alert';
-import Fade from 'react-bootstrap/Fade';
+import Toast from '../../Components/Toast';
 
 import { useHistory } from 'react-router-dom';
 
@@ -34,9 +33,8 @@ const Auth = () => {
 	}, [error]);
 
 	useEffect(() => {
-		socket.on('USER_ACCEPTED', (data) => {
+		socket.on('USER_ACCEPTED', (data: UserData) => {
 			console.log(data);
-			// const parsedData: UserData = JSON.parse(data);
 			const { userName, employeeID, authIDs } = data;
 			auth.login(userName, employeeID, authIDs);
 			history.push('/');
@@ -65,13 +63,7 @@ const Auth = () => {
 			className='d-flex flex-column align-items-center justify-content-center'
 			style={{ height: '100vh' }}
 		>
-			<Fade in={error}>
-				<div className='position-absolute' style={{ top: '30px', right: '30px' }}>
-					<Alert variant='danger' show={error}>
-						Your email or password was incorrect
-					</Alert>
-				</div>
-			</Fade>
+			<Toast show={error} message='Your email or password was incorrect' variant='danger' />
 			<h1>Accounting n' Shit</h1>
 			<Form
 				style={{ width: '50%' }}
